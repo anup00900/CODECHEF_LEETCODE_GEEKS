@@ -1,0 +1,110 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode()
+ 
+ : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+    
+    ListNode* reverse(ListNode * h)
+    {
+        ListNode * c = h;
+        ListNode * prev =NULL;
+        ListNode * n;
+        if(c->next == NULL)
+        {
+            return(c);
+        }
+        while(c != NULL)
+        {
+            n = c->next;
+            c->next = prev;
+            prev = c;
+            c = n;
+        }
+        
+        return(prev);
+        
+    }
+    
+public:
+    void reorderList(ListNode* head) {
+        
+        
+        ListNode* t = head;
+        ListNode* p = head;
+        ListNode* temp1;
+        ListNode* q=head;
+        ListNode* temp2;
+       
+        int c=0;
+        while(t != NULL)
+        {
+            
+            c++;
+            t=t->next;
+        }
+      if(c > 1)
+      {
+          if(c %2 == 1)
+        {
+            int n = c/2;
+            for(int i=1;i<=n;i++)
+            {
+                q=q->next;
+                
+            }
+            q->next = reverse(q->next);
+            q = q->next;
+            while(q !=NULL)
+            {
+                temp1 = p->next;
+                p->next=q;
+                temp2=q->next;
+                q->next=temp1;
+                q=temp2;
+                p=temp1;
+            }
+            p->next=q;
+            
+            
+        }
+        else
+        {
+            int n = c/2;
+            for(int i=1;i<n;i++)
+            {
+                q=q->next;
+                
+            }
+            q->next = reverse(q->next);
+            q = q->next;
+            while(q->next !=NULL)
+            {
+                temp1 = p->next;
+                p->next=q;
+                temp2=q->next;
+                q->next=temp1;
+                q=temp2;
+                p=temp1;
+            }
+            p->next=q;
+        }
+        
+        
+          
+      }
+        
+        
+        
+        
+        
+        
+    }
+};
